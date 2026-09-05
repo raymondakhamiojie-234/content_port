@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContentPost {
+  id        String   @id @default(cuid())
+  title     String?
+  caption   String?
+  platform  String   // tiktok, instagram, etc
+  url       String?
+  mediaUrl  String?
+  category  String?
+  featured  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Song {
+  id           String   @id @default(cuid())
+  title        String
+  releaseDate  DateTime?
+  coverUrl     String?
+  description  String?
+  audioUrl     String?
+  spotifyUrl   String?
+  appleUrl     String?
+  youtubeUrl   String?
+  featured     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model FilmProject {
+  id           String   @id @default(cuid())
+  title        String
+  description  String?
+  posterUrl    String?
+  trailerUrl   String?
+  videoUrl     String?
+  credits      String?
+  releaseDate  DateTime?
+  featured     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model GalleryImage {
+  id        String   @id @default(cuid())
+  url       String
+  caption   String?
+  category  String?
+  featured  Boolean  @default(false)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContactEnquiry {
+  id              String   @id @default(cuid())
+  fullName        String
+  company         String?
+  email           String
+  phone           String?
+  opportunityType String
+  budgetRange     String?
+  message         String
+  status          String   @default("NEW") // NEW, READ, CONTACTED, ARCHIVED
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}

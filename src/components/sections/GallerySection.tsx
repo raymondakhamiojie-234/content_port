@@ -2,7 +2,16 @@
 
 import { motion } from "framer-motion";
 
-export function GallerySection() {
+interface GalleryImage {
+  id: string;
+  url: string;
+  caption: string | null;
+  category: string | null;
+}
+
+export function GallerySection({ images }: { images: GalleryImage[] }) {
+  if (!images || images.length === 0) return null;
+
   return (
     <section id="gallery" className="py-32 px-6 bg-bg-primary text-text-primary border-t border-border-color">
       <div className="container mx-auto">
@@ -13,20 +22,24 @@ export function GallerySection() {
           <p className="text-xl font-script text-accent-pink">Moments captured in time</p>
         </div>
 
-        {/* Simple Masonry Placeholder */}
+        {/* Masonry */}
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item, i) => (
+          {images.map((img, i) => (
             <motion.div
-              key={item}
+              key={img.id}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
-              className={`bg-accent-subtle rounded-2xl overflow-hidden shadow-md flex items-center justify-center border-4 border-bg-secondary ${
-                i % 3 === 0 ? "h-96" : i % 2 === 0 ? "h-64" : "h-80"
-              }`}
+              className="bg-accent-subtle rounded-2xl overflow-hidden shadow-md relative group border-4 border-bg-secondary break-inside-avoid"
             >
-              <span className="text-text-muted font-bold tracking-widest uppercase text-xs">Image {item}</span>
+              <img src={img.url} alt={img.caption || "Gallery photo"} className="w-full h-auto object-cover" />
+              {img.caption && (
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center p-4 transition-opacity duration-300">
+                  <p className="text-white text-center font-bold tracking-wide">{img.caption}</p>
+                  {img.category && <p className="text-accent-gold text-xs uppercase tracking-widest mt-2">{img.category}</p>}
+                </div>
+              )}
             </motion.div>
           ))}
         </div>

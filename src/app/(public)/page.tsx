@@ -4,8 +4,27 @@ import { CatchphrasesSection } from "@/components/sections/CatchphrasesSection";
 import { MusicSection } from "@/components/sections/MusicSection";
 import { ContentSection } from "@/components/sections/ContentSection";
 import { GallerySection } from "@/components/sections/GallerySection";
+import { PrismaClient } from "@prisma/client";
 
-export default function Home() {
+const prisma = new PrismaClient();
+
+export default async function Home() {
+  const songs = await prisma.song.findMany({
+    orderBy: { releaseDate: 'desc' }
+  });
+
+  const images = await prisma.galleryImage.findMany({
+    orderBy: { createdAt: 'desc' }
+  });
+
+  const contentPosts = await prisma.contentPost.findMany({
+    orderBy: { createdAt: 'desc' }
+  });
+
+  const films = await prisma.filmProject.findMany({
+    orderBy: { createdAt: 'desc' }
+  });
+
   return (
     <main className="flex min-h-screen flex-col w-full overflow-hidden bg-bg-primary">
       <HeroSection />
@@ -25,20 +44,45 @@ export default function Home() {
 
       <JourneySection />
       
-      <ContentSection />
+      <ContentSection posts={contentPosts} />
       
       <CatchphrasesSection />
 
-      <MusicSection />
+      <MusicSection songs={songs} />
 
       {/* Film / Entertainment Placeholder */}
-      <section id="film" className="py-32 px-6 bg-bg-secondary text-text-primary text-center">
+      <section id="film" className="py-32 px-6 bg-bg-secondary text-text-primary text-center border-t border-border-color">
         <h2 className="text-4xl md:text-6xl font-display uppercase mb-16 tracking-widest text-accent-gold">
           From Viral Moments to the Screen
         </h2>
-        <div className="max-w-3xl mx-auto bg-bg-primary rounded-2xl shadow-xl aspect-video flex items-center justify-center border border-border-color">
-          <span className="text-text-muted uppercase tracking-widest font-bold">Unfaithful Saturday - Short Film</span>
-        </div>
+        {films.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 container mx-auto">
+            {films.map((film) => (
+              <div key={film.id} className="bg-bg-primary rounded-2xl shadow-xl overflow-hidden border border-border-color">
+                <div className="aspect-video relative bg-accent-subtle">
+                  {film.posterUrl ? (
+                    <img src={film.posterUrl} alt={film.title} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-text-muted uppercase tracking-widest font-bold">No Poster</span>
+                    </div>
+                  )}
+                </div>
+                <div className="p-6 text-left">
+                  <h3 className="text-2xl font-display uppercase tracking-widest mb-2">{film.title}</h3>
+                  <p className="text-text-secondary text-sm line-clamp-3 mb-4">{film.description}</p>
+                  {film.trailerUrl && (
+                    <a href={film.trailerUrl} target="_blank" rel="noopener noreferrer" className="text-accent-gold text-sm uppercase tracking-widest font-bold hover:underline">Watch Trailer</a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="max-w-3xl mx-auto bg-bg-primary rounded-2xl shadow-xl aspect-video flex items-center justify-center border border-border-color">
+            <span className="text-text-muted uppercase tracking-widest font-bold">Unfaithful Saturday - Short Film</span>
+          </div>
+        )}
       </section>
 
       {/* Achievements Placeholder */}
@@ -63,7 +107,7 @@ export default function Home() {
         </div>
       </section>
 
-      <GallerySection />
+      <GallerySection images={images} />
 
       {/* Contact Placeholder */}
       <section id="contact" className="py-32 px-6 bg-bg-secondary text-text-primary text-center">

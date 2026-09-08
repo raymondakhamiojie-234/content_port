@@ -18,6 +18,7 @@ export function AdminSidebar() {
     { name: "Content Stage", icon: ImageIcon, href: "/admin/content" },
     { name: "Music", icon: Music, href: "/admin/music" },
     { name: "Films", icon: Film, href: "/admin/films" },
+    { name: "Gallery", icon: ImageIcon, href: "/admin/gallery" },
     { name: "Journey", icon: Map, href: "/admin/journey" },
     { name: "Enquiries", icon: MessageSquare, href: "/admin/enquiries" },
   ];

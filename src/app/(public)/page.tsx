@@ -2,6 +2,8 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { JourneySection } from "@/components/sections/JourneySection";
 import { CatchphrasesSection } from "@/components/sections/CatchphrasesSection";
 import { MusicSection } from "@/components/sections/MusicSection";
+import { ContentSection } from "@/components/sections/ContentSection";
+import { GallerySection } from "@/components/sections/GallerySection";
 
 export default function Home() {
   return (
@@ -23,6 +25,8 @@ export default function Home() {
 
       <JourneySection />
       
+      <ContentSection />
+      
       <CatchphrasesSection />
 
       <MusicSection />
@@ -38,7 +42,7 @@ export default function Home() {
       </section>
 
       {/* Achievements Placeholder */}
-      <section className="py-32 px-6 bg-bg-primary text-text-primary text-center">
+      <section className="py-32 px-6 bg-bg-primary text-text-primary text-center border-y border-border-color">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 container mx-auto">
           <div className="bg-bg-secondary p-8 rounded-2xl shadow-sm border border-border-color">
             <h3 className="text-5xl md:text-6xl font-display font-bold text-accent-gold mb-4">1.5M+</h3>
@@ -58,6 +62,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <GallerySection />
 
       {/* Contact Placeholder */}
       <section id="contact" className="py-32 px-6 bg-bg-secondary text-text-primary text-center">

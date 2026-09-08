@@ -45,46 +45,51 @@ export function HeroSection() {
   return (
     <section 
       ref={containerRef}
-      className="relative h-screen w-full flex items-center justify-center overflow-hidden"
+      className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-bg-primary"
     >
       {/* Background Image / Placeholder */}
       <div 
         ref={bgRef}
         className="absolute inset-0 z-0 h-[120%] w-full"
       >
-        <div className="absolute inset-0 bg-black/40 z-10" />
-        <div className="w-full h-full bg-neutral-900 bg-center bg-cover flex items-center justify-center">
+        <div className="absolute inset-0 bg-bg-primary/20 z-10" />
+        <div className="w-full h-full bg-accent-subtle bg-center bg-cover flex items-center justify-center border-b-4 border-accent-gold/20">
             {/* Using a placeholder for now since there is no image */}
-            <span className="text-white/20 text-xl">[HERO IMAGE PLACEHOLDER]</span>
+            <span className="text-text-muted/30 text-xl font-display uppercase tracking-widest">[HERO IMAGE PLACEHOLDER]</span>
         </div>
       </div>
 
       {/* Content */}
       <div 
         ref={textRef}
-        className="relative z-20 text-center px-6 flex flex-col items-center"
+        className="relative z-20 text-center px-6 flex flex-col items-center mt-20"
       >
-        <motion.h1 
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="text-6xl md:text-8xl lg:text-9xl font-display font-bold uppercase tracking-widest text-white mb-4"
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="relative"
         >
-          Queenfineshii
-        </motion.h1>
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold uppercase tracking-widest text-text-primary mb-2 drop-shadow-sm">
+            Queenfineshii
+          </h1>
+          <span className="absolute -bottom-8 md:-bottom-12 right-0 md:-right-12 text-4xl md:text-6xl font-script text-accent-pink -rotate-6">
+            The Queen
+          </span>
+        </motion.div>
         
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, width: 0 }}
+          animate={{ opacity: 1, width: 96 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="h-[1px] w-24 bg-accent-gold mb-6"
+          className="h-[2px] bg-accent-gold mb-8 mt-12"
         />
 
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1 }}
-          className="text-xl md:text-2xl font-light tracking-widest text-white/90 uppercase mb-2"
+          className="text-xl md:text-2xl font-light tracking-widest text-text-secondary uppercase mb-2"
         >
           Ginika Godwin
         </motion.h2>
@@ -93,7 +98,7 @@ export function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="text-sm md:text-base text-white/70 tracking-widest uppercase mb-12"
+          className="text-sm md:text-base text-text-muted tracking-widest uppercase mb-12"
         >
           Content Creator • Musical Artist • Entertainer
         </motion.p>
@@ -106,13 +111,13 @@ export function HeroSection() {
         >
           <Link 
             href="#journey"
-            className="px-8 py-4 bg-white text-black font-medium tracking-widest uppercase text-sm hover:bg-accent-gold transition-colors"
+            className="px-10 py-4 bg-text-primary text-bg-primary font-medium tracking-widest uppercase text-sm hover:bg-accent-gold transition-colors rounded-full shadow-lg"
           >
             Explore My World
           </Link>
           <Link 
             href="#contact"
-            className="px-8 py-4 bg-transparent border border-white text-white font-medium tracking-widest uppercase text-sm hover:bg-white/10 transition-colors"
+            className="px-10 py-4 bg-transparent border border-text-primary text-text-primary font-medium tracking-widest uppercase text-sm hover:bg-text-primary hover:text-bg-primary transition-colors rounded-full"
           >
             Work With Me
           </Link>
@@ -126,8 +131,8 @@ export function HeroSection() {
         transition={{ delay: 2, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center"
       >
-        <span className="text-[10px] uppercase tracking-widest text-white/50 mb-4">Scroll</span>
-        <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden">
+        <span className="text-[10px] uppercase tracking-widest text-text-muted mb-4 font-bold">Scroll</span>
+        <div className="w-[1px] h-12 bg-text-muted/30 relative overflow-hidden">
           <motion.div 
             animate={{ 
               y: ["-100%", "100%"] 
@@ -137,7 +142,7 @@ export function HeroSection() {
               duration: 1.5,
               ease: "linear"
             }}
-            className="absolute inset-0 bg-white"
+            className="absolute inset-0 bg-text-primary"
           />
         </div>
       </motion.div>

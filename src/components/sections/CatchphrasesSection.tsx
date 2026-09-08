@@ -12,9 +12,9 @@ const phrases = [
 
 export function CatchphrasesSection() {
   return (
-    <section className="py-32 px-6 bg-black text-white overflow-hidden border-y border-white/10">
+    <section className="py-32 px-6 bg-bg-secondary text-text-primary overflow-hidden border-y border-border-color">
       <div className="container mx-auto text-center">
-        <h2 className="text-sm md:text-base tracking-widest text-accent-gold uppercase mb-16">
+        <h2 className="text-sm md:text-base tracking-widest text-accent-gold uppercase mb-16 font-bold">
           Clock It.
         </h2>
         
@@ -22,10 +22,10 @@ export function CatchphrasesSection() {
           {phrases.map((phrase, i) => (
             <motion.div
               key={phrase}
-              whileHover={{ scale: 1.05, color: "var(--accent-gold)" }}
+              whileHover={{ scale: 1.05, color: "var(--accent-pink)" }}
               className="cursor-pointer"
             >
-              <h3 className="text-4xl md:text-7xl lg:text-8xl font-display font-bold uppercase transition-colors duration-300">
+              <h3 className="text-5xl md:text-7xl lg:text-8xl font-script transition-colors duration-300">
                 {phrase}
               </h3>
             </motion.div>

@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand Colors */
-  --bg-primary: #050505;
-  --bg-secondary: #111111;
-  --text-primary: #ffffff;
-  --text-secondary: #e5e5e5;
-  --text-muted: #a3a3a3;
-  --accent-gold: #d4af37;
-  --accent-gold-hover: #f1cd57;
-  --accent-subtle: #1f1f1f;
-  --border-color: #262626;
-  --input-bg: #0a0a0a;
+  /* Brand Colors - Dolly Parton Inspired (Light, Warm, Elegant) */
+  --bg-primary: #FAF8F5;
+  --bg-secondary: #FFFFFF;
+  --text-primary: #2A2A2A;
+  --text-secondary: #5A5A5A;
+  --text-muted: #8E8E8E;
+  --accent-gold: #D69F4C;
+  --accent-gold-hover: #E8B66B;
+  --accent-pink: #E8C1C5; /* Dolly-esque soft pink accent */
+  --accent-subtle: #F0EBE1;
+  --border-color: #E6E2D8;
+  --input-bg: #FFFFFF;
 }
 
 @theme inline {
@@ -22,11 +23,13 @@
   --color-text-muted: var(--text-muted);
   --color-accent-gold: var(--accent-gold);
   --color-accent-gold-hover: var(--accent-gold-hover);
+  --color-accent-pink: var(--accent-pink);
   --color-accent-subtle: var(--accent-subtle);
   --color-border-color: var(--border-color);
   --color-input-bg: var(--input-bg);
   --font-display: var(--font-playfair);
   --font-sans: var(--font-inter);
+  --font-script: var(--font-script);
 }
 
 html {

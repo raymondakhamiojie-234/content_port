@@ -20,15 +20,6 @@ export default function AdminDashboard() {
 
   if (!session) return null;
 
-  const menuItems = [
-    { name: "Dashboard", icon: LayoutDashboard, href: "/admin" },
-    { name: "Content Stage", icon: ImageIcon, href: "/admin/content" },
-    { name: "Music", icon: Music, href: "/admin/music" },
-    { name: "Films", icon: Film, href: "/admin/films" },
-    { name: "Journey", icon: Map, href: "/admin/journey" },
-    { name: "Enquiries", icon: MessageSquare, href: "/admin/enquiries" },
-  ];
-
   return (
     <main className="p-8">
       <header className="mb-10">

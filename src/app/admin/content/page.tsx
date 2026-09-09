@@ -7,10 +7,10 @@ import { useRouter } from "next/navigation";
 
 interface ContentPost {
   id: string;
-  title: string;
+  title: string | null;
+  caption: string | null;
   platform: string;
-  views: string | null;
-  published: boolean;
+  featured: boolean;
 }
 
 export default function ContentAdminPage() {
@@ -62,7 +62,6 @@ export default function ContentAdminPage() {
             <tr className="border-b border-white/10 bg-white/5">
               <th className="p-4 text-xs uppercase tracking-widest text-white/50 font-normal">Title</th>
               <th className="p-4 text-xs uppercase tracking-widest text-white/50 font-normal">Platform</th>
-              <th className="p-4 text-xs uppercase tracking-widest text-white/50 font-normal">Views</th>
               <th className="p-4 text-xs uppercase tracking-widest text-white/50 font-normal">Status</th>
               <th className="p-4 text-xs uppercase tracking-widest text-white/50 font-normal text-right">Actions</th>
             </tr>
@@ -70,19 +69,18 @@ export default function ContentAdminPage() {
           <tbody>
             {content.length === 0 ? (
               <tr>
-                <td colSpan={5} className="p-8 text-center text-white/30">
+                <td colSpan={4} className="p-8 text-center text-white/30">
                   No content posts found. Create one!
                 </td>
               </tr>
             ) : (
               content.map((item) => (
                 <tr key={item.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                  <td className="p-4 font-medium">{item.title}</td>
-                  <td className="p-4 text-white/70">{item.platform}</td>
-                  <td className="p-4 text-white/70">{item.views || "-"}</td>
+                  <td className="p-4 font-medium">{item.title || item.caption || "Untitled"}</td>
+                  <td className="p-4 text-white/70 capitalize">{item.platform}</td>
                   <td className="p-4">
-                    <span className={`px-2 py-1 text-xs rounded ${item.published ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
-                      {item.published ? 'Published' : 'Draft'}
+                    <span className={`px-2 py-1 text-xs rounded ${item.featured ? 'bg-green-500/20 text-green-400' : 'bg-white/10 text-white/50'}`}>
+                      {item.featured ? 'Featured' : 'Standard'}
                     </span>
                   </td>
                   <td className="p-4 flex justify-end space-x-3">

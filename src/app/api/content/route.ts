@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 export async function GET() {
   try {
     const content = await prisma.contentPost.findMany({
-      orderBy: { order: 'asc' }
+      orderBy: { createdAt: 'desc' }
     });
     return NextResponse.json(content);
   } catch (error) {
@@ -24,13 +24,12 @@ export async function POST(request: Request) {
     const content = await prisma.contentPost.create({
       data: {
         title: data.title,
+        caption: data.caption,
         platform: data.platform,
         url: data.url,
-        videoUrl: data.videoUrl,
-        thumbnailUrl: data.thumbnailUrl,
-        views: data.views,
-        order: data.order || 0,
-        published: data.published ?? true
+        mediaUrl: data.mediaUrl,
+        category: data.category,
+        featured: data.featured ?? false,
       }
     });
     return NextResponse.json(content);

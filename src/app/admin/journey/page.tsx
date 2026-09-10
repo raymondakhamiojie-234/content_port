@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Edit2, Trash2 } from "lucide-react";
+import { Plus, Edit2, Trash2, X } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { ImageUploader } from "@/components/ui/ImageUploader";
 
 interface JourneyEvent {
   id: string;
@@ -18,6 +19,13 @@ export default function JourneyAdminPage() {
   const router = useRouter();
   const [events, setEvents] = useState<JourneyEvent[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    title: "",
+    caption: "",
+    mediaUrl: "",
+    featured: true
+  });
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -30,14 +38,30 @@ export default function JourneyAdminPage() {
   const fetchEvents = async () => {
     try {
       const res = await fetch("/api/journey");
-      if (res.ok) {
-        const data = await res.json();
-        setEvents(data);
-      }
+      const data = await res.json();
+      setEvents(data);
     } catch (error) {
       console.error("Error fetching journey events:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/journey", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setShowModal(false);
+        setFormData({ title: "", caption: "", mediaUrl: "", featured: true });
+        fetchEvents();
+      }
+    } catch (error) {
+      console.error("Error creating milestone:", error);
     }
   };
 
@@ -52,7 +76,10 @@ export default function JourneyAdminPage() {
           <h2 className="text-3xl font-display uppercase tracking-widest text-accent-gold">Journey Milestones</h2>
           <p className="text-white/50 mt-2">Manage timeline events and career milestones.</p>
         </div>
-        <button className="flex items-center space-x-2 bg-white text-black px-6 py-3 font-bold uppercase tracking-widest hover:bg-accent-gold transition-colors text-sm rounded">
+        <button 
+          onClick={() => setShowModal(true)}
+          className="flex items-center space-x-2 bg-white text-black px-6 py-3 font-bold uppercase tracking-widest hover:bg-accent-gold transition-colors text-sm rounded"
+        >
           <Plus size={18} />
           <span>Add Milestone</span>
         </button>
@@ -95,6 +122,39 @@ export default function JourneyAdminPage() {
           </tbody>
         </table>
       </div>
+
+      {showModal && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div className="bg-zinc-900 border border-white/10 rounded-lg max-w-2xl w-full p-8 my-8">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-display uppercase tracking-widest text-accent-gold">Add New Milestone</h3>
+              <button onClick={() => setShowModal(false)} className="text-white/50 hover:text-white"><X /></button>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-sm uppercase tracking-widest text-white/50 mb-2">Milestone Image (Optional)</label>
+                <ImageUploader onUpload={(url) => setFormData({...formData, mediaUrl: url})} defaultImage={formData.mediaUrl} />
+              </div>
+
+              <div>
+                <label className="block text-sm uppercase tracking-widest text-white/50 mb-2">Title</label>
+                <input required type="text" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} className="w-full bg-black border border-white/10 rounded p-3 text-white focus:border-accent-gold outline-none" placeholder="e.g. 1M Followers on TikTok" />
+              </div>
+
+              <div>
+                <label className="block text-sm uppercase tracking-widest text-white/50 mb-2">Description</label>
+                <textarea required rows={3} value={formData.caption} onChange={e => setFormData({...formData, caption: e.target.value})} className="w-full bg-black border border-white/10 rounded p-3 text-white focus:border-accent-gold outline-none" />
+              </div>
+
+              <div className="pt-6 border-t border-white/10 flex justify-end space-x-4">
+                <button type="button" onClick={() => setShowModal(false)} className="px-6 py-3 border border-white/10 rounded text-white/70 hover:text-white transition-colors uppercase tracking-widest text-sm font-bold">Cancel</button>
+                <button type="submit" className="px-6 py-3 bg-accent-gold text-black rounded hover:bg-white transition-colors uppercase tracking-widest text-sm font-bold">Save Milestone</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

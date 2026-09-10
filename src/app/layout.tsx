@@ -19,8 +19,22 @@ const script = Alex_Brush({
 });
 
 export const metadata: Metadata = {
-  title: "Queenfineshii | Ginika Godwin — Content Creator, Musical Artist & Entertainer",
-  description: "Ginika Godwin, known as Queenfineshii, is a Nigerian-born content creator, musical artist and entertainer building a global entertainment brand through content, music and film.",
+  title: "Queenfineshii | Official Portfolio",
+  description: "The official portfolio of Ginika Godwin, known as Queenfineshii. Content creator, musical artist, and entertainer.",
+  keywords: ["Queenfineshii", "Ginika Godwin", "Content Creator", "Musical Artist", "Entertainer", "TikTok", "Instagram"],
+  openGraph: {
+    title: "Queenfineshii | Official Portfolio",
+    description: "Content creator, musical artist, and entertainer.",
+    url: "https://queenfineshii.com",
+    siteName: "Queenfineshii",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Queenfineshii | Official Portfolio",
+    description: "Content creator, musical artist, and entertainer.",
+  },
 };
 
 export default function RootLayout({

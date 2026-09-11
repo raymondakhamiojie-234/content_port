@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FaTiktok, FaInstagram, FaXTwitter, FaYoutube, FaFacebookF, FaTwitch, FaSnapchat } from "react-icons/fa6";
 
 export function Footer() {
   return (
@@ -26,27 +27,27 @@ export function Footer() {
           
           <div>
             <h3 className="text-lg font-bold uppercase mb-6 text-accent-gold">Connect</h3>
-            <div className="flex flex-wrap gap-2 mb-8">
-              <a href="https://tiktok.com/@queenfineshii" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
-                TikTok
+            <div className="flex flex-wrap gap-3 mb-8">
+              <a href="https://tiktok.com/@queenfineshii" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all">
+                <FaTiktok size={18} />
               </a>
-              <a href="https://instagram.com/queenfineshii" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
-                IG
+              <a href="https://instagram.com/queenfineshii" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all">
+                <FaInstagram size={18} />
               </a>
-              <a href="https://x.com/queenfineshii" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
-                X
+              <a href="https://x.com/queenfineshii" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all">
+                <FaXTwitter size={18} />
               </a>
-              <a href="https://youtube.com/@GinikaGodwin" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
-                YT
+              <a href="https://youtube.com/@GinikaGodwin" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all">
+                <FaYoutube size={18} />
               </a>
-              <a href="https://facebook.com/ginikagodwinn" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
-                FB
+              <a href="https://facebook.com/ginikagodwinn" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all">
+                <FaFacebookF size={18} />
               </a>
-              <a href="https://twitch.tv/ginikagodwinn" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
-                Twitch
+              <a href="https://twitch.tv/ginikagodwinn" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all">
+                <FaTwitch size={18} />
               </a>
-              <a href="https://snapchat.com/add/queenfineshii" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
-                Snap
+              <a href="https://snapchat.com/add/queenfineshii" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all">
+                <FaSnapchat size={18} />
               </a>
             </div>
             <ul className="space-y-4">

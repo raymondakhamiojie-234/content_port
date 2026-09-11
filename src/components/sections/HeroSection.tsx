@@ -52,7 +52,7 @@ export function HeroSection() {
         ref={bgRef}
         className="absolute inset-0 z-0 h-[120%] w-full"
       >
-        <div className="absolute inset-0 bg-black/60 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/80 z-10" />
         <Image
           src="/hero.jpg"
           alt="Queenfineshii"
@@ -73,10 +73,10 @@ export function HeroSection() {
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="relative"
         >
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold uppercase tracking-widest text-text-primary mb-2 drop-shadow-sm">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold uppercase tracking-widest text-white mb-2 drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">
             Queenfineshii
           </h1>
-          <span className="absolute -bottom-8 md:-bottom-12 right-0 md:-right-12 text-4xl md:text-6xl font-script text-accent-pink -rotate-6">
+          <span className="absolute -bottom-8 md:-bottom-12 right-0 md:-right-12 text-4xl md:text-6xl font-script text-accent-pink -rotate-6 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
             The Queen
           </span>
         </motion.div>

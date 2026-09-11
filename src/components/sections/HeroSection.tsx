@@ -53,11 +53,13 @@ export function HeroSection() {
         className="absolute inset-0 z-0 h-[120%] w-full"
       >
         <div className="absolute inset-0 bg-black/60 z-10" />
-        <div 
-          className="w-full h-full bg-center bg-cover flex items-center justify-center border-b-4 border-accent-gold/20"
-          style={{ backgroundImage: 'url("/hero.jpg")' }}
-        >
-        </div>
+        <Image
+          src="/hero.jpg"
+          alt="Queenfineshii"
+          fill
+          priority
+          className="object-cover object-center md:object-top"
+        />
       </div>
 
       {/* Content */}

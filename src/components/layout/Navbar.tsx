@@ -37,10 +37,10 @@ export function Navbar() {
             : "bg-transparent py-6"
         }`}
       >
-        <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between">
+        <div className="container mx-auto px-6 md:px-12 flex items-center justify-center md:justify-between relative">
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden absolute left-6 top-1/2 -translate-y-1/2 text-text-primary"
+            className="md:hidden absolute left-6 text-text-primary"
             onClick={() => setMobileMenuOpen(true)}
           >
             <Menu size={28} />

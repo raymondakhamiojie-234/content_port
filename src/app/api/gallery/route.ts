@@ -44,9 +44,8 @@ export async function PUT(request: Request) {
     const item = await prisma.galleryImage.update({
       where: { id: data.id },
       data: {
-        title: data.title,
         caption: data.caption,
-        imageUrl: data.imageUrl,
+        url: data.url,
         category: data.category,
         featured: data.featured ?? false,
 }

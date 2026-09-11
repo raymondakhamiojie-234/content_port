@@ -45,14 +45,16 @@ export async function PUT(request: Request) {
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const data = await request.json();
-    const item = await prisma.film.update({
+    const item = await prisma.filmProject.update({
       where: { id: data.id },
       data: {
         title: data.title,
         description: data.description,
         releaseDate: data.releaseDate ? new Date(data.releaseDate) : null,
-        coverUrl: data.coverUrl,
+        posterUrl: data.posterUrl,
+        trailerUrl: data.trailerUrl,
         videoUrl: data.videoUrl,
+        credits: data.credits,
         featured: data.featured ?? false,
 }
     });
@@ -71,7 +73,7 @@ export async function DELETE(request: Request) {
     const id = searchParams.get('id');
     if (!id) return NextResponse.json({ error: "No ID provided" }, { status: 400 });
 
-    await prisma.film.delete({ where: { id } });
+    await prisma.filmProject.delete({ where: { id } });
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: "Failed to delete item" }, { status: 500 });

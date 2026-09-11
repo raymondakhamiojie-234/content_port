@@ -52,10 +52,11 @@ export function HeroSection() {
         ref={bgRef}
         className="absolute inset-0 z-0 h-[120%] w-full"
       >
-        <div className="absolute inset-0 bg-bg-primary/20 z-10" />
-        <div className="w-full h-full bg-accent-subtle bg-center bg-cover flex items-center justify-center border-b-4 border-accent-gold/20">
-            {/* Using a placeholder for now since there is no image */}
-            <span className="text-text-muted/30 text-xl font-display uppercase tracking-widest">[HERO IMAGE PLACEHOLDER]</span>
+        <div className="absolute inset-0 bg-black/60 z-10" />
+        <div 
+          className="w-full h-full bg-center bg-cover flex items-center justify-center border-b-4 border-accent-gold/20"
+          style={{ backgroundImage: 'url("/hero.jpg")' }}
+        >
         </div>
       </div>
 

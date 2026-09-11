@@ -31,6 +31,8 @@ export default function FilmsAdminPage() {
     featured: false
   });
 
+  const [editingId, setEditingId] = useState<string | null>(null);
+
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/admin/login");
@@ -51,21 +53,49 @@ export default function FilmsAdminPage() {
     }
   };
 
+  const handleEdit = (item: Film) => {
+    setEditingId(item.id);
+    setFormData({
+      title: item.title || "",
+      description: (item as any).description || "",
+      releaseDate: item.releaseDate ? new Date(item.releaseDate).toISOString().split('T')[0] : "",
+      posterUrl: item.posterUrl || "",
+      trailerUrl: (item as any).trailerUrl || "",
+      videoUrl: (item as any).videoUrl || "",
+      credits: (item as any).credits || "",
+      featured: item.featured
+    });
+    setShowModal(true);
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this film?")) return;
+    try {
+      const res = await fetch(`/api/films?id=${id}`, { method: "DELETE" });
+      if (res.ok) fetchFilms();
+    } catch (error) {
+      console.error("Error deleting:", error);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const method = editingId ? "PUT" : "POST";
+      const body = editingId ? { ...formData, id: editingId } : formData;
       const res = await fetch("/api/films", {
-        method: "POST",
+        method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(body),
       });
       if (res.ok) {
         setShowModal(false);
+        setEditingId(null);
         setFormData({ title: "", description: "", releaseDate: "", posterUrl: "", trailerUrl: "", videoUrl: "", credits: "", featured: false });
         fetchFilms();
       }
     } catch (error) {
-      console.error("Error creating film:", error);
+      console.error("Error saving film:", error);
     }
   };
 
@@ -125,10 +155,10 @@ export default function FilmsAdminPage() {
                     {film.featured ? <Check className="text-accent-gold" size={18} /> : <span className="text-white/20">-</span>}
                   </td>
                   <td className="p-4 flex justify-end space-x-3 items-center h-[73px]">
-                    <button className="p-2 text-white/50 hover:text-white transition-colors">
+                    <button onClick={() => handleEdit(film)} className="p-2 text-white/50 hover:text-white transition-colors">
                       <Edit2 size={16} />
                     </button>
-                    <button className="p-2 text-white/50 hover:text-red-400 transition-colors">
+                    <button onClick={() => handleDelete(film.id)} className="p-2 text-white/50 hover:text-red-400 transition-colors">
                       <Trash2 size={16} />
                     </button>
                   </td>

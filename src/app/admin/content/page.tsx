@@ -30,6 +30,8 @@ export default function ContentAdminPage() {
     featured: false
   });
 
+  const [editingId, setEditingId] = useState<string | null>(null);
+
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/admin/login");
@@ -50,21 +52,48 @@ export default function ContentAdminPage() {
     }
   };
 
+  const handleEdit = (item: ContentPost) => {
+    setEditingId(item.id);
+    setFormData({
+      title: item.title || "",
+      caption: item.caption || "",
+      platform: item.platform || "tiktok",
+      url: (item as any).url || "",
+      mediaUrl: (item as any).mediaUrl || "",
+      category: (item as any).category || "",
+      featured: item.featured
+    });
+    setShowModal(true);
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this content?")) return;
+    try {
+      const res = await fetch(`/api/content?id=${id}`, { method: "DELETE" });
+      if (res.ok) fetchContent();
+    } catch (error) {
+      console.error("Error deleting:", error);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const method = editingId ? "PUT" : "POST";
+      const body = editingId ? { ...formData, id: editingId } : formData;
       const res = await fetch("/api/content", {
-        method: "POST",
+        method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(body),
       });
       if (res.ok) {
         setShowModal(false);
+        setEditingId(null);
         setFormData({ title: "", caption: "", platform: "tiktok", url: "", mediaUrl: "", category: "", featured: false });
         fetchContent();
       }
     } catch (error) {
-      console.error("Error creating content:", error);
+      console.error("Error saving content:", error);
     }
   };
 
@@ -116,10 +145,10 @@ export default function ContentAdminPage() {
                     </span>
                   </td>
                   <td className="p-4 flex justify-end space-x-3">
-                    <button className="p-2 text-white/50 hover:text-white transition-colors">
+                    <button onClick={() => handleEdit(item)} className="p-2 text-white/50 hover:text-white transition-colors">
                       <Edit2 size={16} />
                     </button>
-                    <button className="p-2 text-white/50 hover:text-red-400 transition-colors">
+                    <button onClick={() => handleDelete(item.id)} className="p-2 text-white/50 hover:text-red-400 transition-colors">
                       <Trash2 size={16} />
                     </button>
                   </td>

@@ -27,6 +27,8 @@ export default function GalleryAdminPage() {
     featured: false
   });
 
+  const [editingId, setEditingId] = useState<string | null>(null);
+
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/admin/login");
@@ -47,21 +49,45 @@ export default function GalleryAdminPage() {
     }
   };
 
+  const handleEdit = (item: GalleryImage) => {
+    setEditingId(item.id);
+    setFormData({
+      url: item.url,
+      caption: item.caption || "",
+      category: item.category || "",
+      featured: item.featured
+    });
+    setShowModal(true);
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this image?")) return;
+    try {
+      const res = await fetch(`/api/gallery?id=${id}`, { method: "DELETE" });
+      if (res.ok) fetchImages();
+    } catch (error) {
+      console.error("Error deleting:", error);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const method = editingId ? "PUT" : "POST";
+      const body = editingId ? { ...formData, id: editingId } : formData;
       const res = await fetch("/api/gallery", {
-        method: "POST",
+        method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(body),
       });
       if (res.ok) {
         setShowModal(false);
+        setEditingId(null);
         setFormData({ url: "", caption: "", category: "", featured: false });
         fetchImages();
       }
     } catch (error) {
-      console.error("Error adding image:", error);
+      console.error("Error saving image:", error);
     }
   };
 
@@ -91,8 +117,8 @@ export default function GalleryAdminPage() {
             <div className="aspect-square relative bg-white/5">
               <img src={img.url} alt={img.caption || "Gallery image"} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center space-x-4 transition-opacity">
-                <button className="p-3 bg-white/10 rounded-full hover:bg-white/20 text-white"><Edit2 size={18} /></button>
-                <button className="p-3 bg-red-500/20 rounded-full hover:bg-red-500/40 text-red-400"><Trash2 size={18} /></button>
+                <button onClick={() => handleEdit(img)} className="p-3 bg-white/10 rounded-full hover:bg-white/20 text-white"><Edit2 size={18} /></button>
+                <button onClick={() => handleDelete(img.id)} className="p-3 bg-red-500/20 rounded-full hover:bg-red-500/40 text-red-400"><Trash2 size={18} /></button>
               </div>
             </div>
             <div className="p-4">

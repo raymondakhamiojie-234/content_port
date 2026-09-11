@@ -26,18 +26,27 @@ export function Footer() {
           
           <div>
             <h3 className="text-lg font-bold uppercase mb-6 text-accent-gold">Connect</h3>
-            <div className="flex space-x-4 mb-8">
-              <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
+            <div className="flex flex-wrap gap-2 mb-8">
+              <a href="https://tiktok.com/@queenfineshii" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
+                TikTok
+              </a>
+              <a href="https://instagram.com/queenfineshii" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
                 IG
               </a>
-              <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
-                FB
+              <a href="https://x.com/queenfineshii" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
+                X
               </a>
-              <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
+              <a href="https://youtube.com/@GinikaGodwin" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
                 YT
               </a>
-              <a href="#" className="p-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
-                X
+              <a href="https://facebook.com/ginikagodwinn" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
+                FB
+              </a>
+              <a href="https://twitch.tv/ginikagodwinn" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
+                Twitch
+              </a>
+              <a href="https://snapchat.com/add/queenfineshii" target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all font-bold text-xs">
+                Snap
               </a>
             </div>
             <ul className="space-y-4">

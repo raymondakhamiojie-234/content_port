@@ -4,6 +4,7 @@ import { CatchphrasesSection } from "@/components/sections/CatchphrasesSection";
 import { MusicSection } from "@/components/sections/MusicSection";
 import { ContentSection } from "@/components/sections/ContentSection";
 import { GallerySection } from "@/components/sections/GallerySection";
+import { ContactForm } from "@/components/sections/ContactForm";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -109,15 +110,13 @@ export default async function Home() {
 
       <GallerySection images={images} />
 
-      {/* Contact Placeholder */}
+      {/* Contact Form */}
       <section id="contact" className="py-32 px-6 bg-bg-secondary text-text-primary text-center">
         <h2 className="text-4xl md:text-6xl font-display uppercase mb-6">
           Let's create something people will talk about.
         </h2>
         <p className="text-text-secondary mb-12 max-w-xl mx-auto">For brand partnerships, sponsorships, and collaborations, get in touch with our team.</p>
-        <button className="px-12 py-5 bg-accent-gold text-bg-secondary font-bold uppercase tracking-widest hover:bg-accent-gold-hover transition-colors rounded-full shadow-lg">
-          Get in Touch
-        </button>
+        <ContactForm />
       </section>
     </main>
   );

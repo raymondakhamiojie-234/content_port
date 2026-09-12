@@ -73,10 +73,10 @@ export function HeroSection() {
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="relative"
         >
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold uppercase tracking-widest text-white mb-2 drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-display font-bold uppercase tracking-widest text-white mb-2 drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">
             Queenfineshii
           </h1>
-          <span className="absolute -bottom-8 md:-bottom-12 right-0 md:-right-12 text-4xl md:text-6xl font-script text-accent-pink -rotate-6 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
+          <span className="absolute -bottom-6 sm:-bottom-8 md:-bottom-12 right-2 sm:right-0 md:-right-12 text-3xl sm:text-4xl md:text-6xl font-script text-accent-pink -rotate-6 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
             The Queen
           </span>
         </motion.div>
@@ -101,7 +101,7 @@ export function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}
-          className="text-sm md:text-base text-text-muted tracking-widest uppercase mb-12"
+          className="text-xs sm:text-sm md:text-base text-text-muted tracking-widest uppercase mb-12 px-4 max-w-xs sm:max-w-none"
         >
           Content Creator • Musical Artist • Entertainer
         </motion.p>

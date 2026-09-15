@@ -3,6 +3,8 @@ import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth/next";
 
 const prisma = new PrismaClient();
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function GET() {
   try {

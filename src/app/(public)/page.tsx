@@ -54,7 +54,7 @@ export default async function Home() {
       {/* Film / Entertainment Placeholder */}
       <section id="film" className="py-32 px-6 bg-bg-secondary text-text-primary text-center border-t border-border-color">
         <h2 className="text-4xl md:text-6xl font-display uppercase mb-16 tracking-widest text-accent-gold">
-          From Viral Moments to the Screen
+          From Viral Moments on the Screen
         </h2>
         {films.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 container mx-auto">

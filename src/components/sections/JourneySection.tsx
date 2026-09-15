@@ -14,7 +14,7 @@ const chapters = [
   {
     number: "02",
     title: "Lagos",
-    description: "She moved to Lagos in late 2021 and began taking content creation more seriously, finding her voice and audience.",
+    description: "She moved to Lagos in late 2023 and began taking content creation more seriously, finding her voice and audience.",
   },
   {
     number: "03",
@@ -24,7 +24,7 @@ const chapters = [
   {
     number: "04",
     title: "Queenfineshii",
-    description: "About a year later, she began focusing heavily on TikTok content. The Queenfineshii personality really began to take shape as a bold, confident character.",
+    description: "In 2025, she began focusing heavily on TikTok content. The Queenfineshii personality really began to take shape as a bold, confident character.",
   },
   {
     number: "05",

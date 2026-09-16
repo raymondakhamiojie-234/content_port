@@ -20,6 +20,8 @@ export async function GET() {
   }
 }
 
+import { SendApi, AccountApi, Configuration } from 'hostinger-mail-api-sdk';
+
 export async function POST(request: Request) {
   try {
     const data = await request.json();
@@ -34,6 +36,33 @@ export async function POST(request: Request) {
         message: data.message
       }
     });
+
+    if (process.env.HOSTINGER_MAIL_API_KEY) {
+      try {
+        const config = new Configuration({
+            accessToken: process.env.HOSTINGER_MAIL_API_KEY
+        });
+        
+        const accountApi = new AccountApi(config);
+        const { data: meData } = await accountApi.getCurrentAccount();
+        const mailboxes = meData.data?.mailboxes;
+        
+        if (mailboxes && mailboxes.length > 0) {
+          const mailbox = mailboxes[0];
+          const sendApi = new SendApi(config);
+          
+          await sendApi.sendEmail(mailbox.resourceId, {
+            to: [process.env.NOTIFICATION_EMAIL || mailbox.address],
+            subject: `New Enquiry from ${data.fullName}`,
+            text: `You have received a new contact enquiry on your website.\n\nName: ${data.fullName}\nCompany: ${data.company || 'N/A'}\nEmail: ${data.email}\nPhone: ${data.phone || 'N/A'}\nType: ${data.opportunityType}\nBudget: ${data.budgetRange}\n\nMessage:\n${data.message}\n`,
+            displayName: "Queenfineshii Website"
+          } as any);
+        }
+      } catch (mailError) {
+        console.error("Failed to send email via Hostinger:", mailError);
+      }
+    }
+
     return NextResponse.json(enquiry);
   } catch (error) {
     return NextResponse.json({ error: "Failed to submit enquiry" }, { status: 500 });

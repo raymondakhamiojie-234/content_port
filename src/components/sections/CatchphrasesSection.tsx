@@ -7,7 +7,7 @@ const phrases = [
   "Hit it. Hit it. Hit it",
   "Gooda gooda",
   "Keep going",
-  "Hey Fineshyt",
+  "Hey Fineshii",
 ];
 
 export function CatchphrasesSection() {

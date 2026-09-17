@@ -68,7 +68,7 @@ export function JourneySection() {
     <section 
       id="journey" 
       ref={sectionRef} 
-      className="bg-bg-primary text-text-primary overflow-hidden py-20 min-h-screen flex items-center border-t border-border-color"
+      className="relative z-20 bg-bg-primary text-text-primary overflow-hidden py-20 min-h-screen flex items-center border-t border-border-color"
     >
       <div className="pl-6 md:pl-20">
         <h2 className="text-4xl md:text-6xl font-display uppercase mb-16 tracking-widest text-accent-gold">

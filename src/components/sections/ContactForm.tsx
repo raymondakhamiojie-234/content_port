@@ -54,29 +54,29 @@ export function ContactForm() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="fullName" className="block text-xs uppercase tracking-widest text-text-secondary mb-2">Full Name *</label>
-              <input required type="text" id="fullName" name="fullName" className="w-full bg-bg-primary border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-gold transition-colors" placeholder="Ginika Godwin" />
+              <input required type="text" id="fullName" name="fullName" className="w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors" placeholder="Ginika Godwin" />
             </div>
             <div>
               <label htmlFor="company" className="block text-xs uppercase tracking-widest text-text-secondary mb-2">Company / Agency</label>
-              <input type="text" id="company" name="company" className="w-full bg-bg-primary border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-gold transition-colors" placeholder="Your Brand" />
+              <input type="text" id="company" name="company" className="w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors" placeholder="Your Brand" />
             </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="email" className="block text-xs uppercase tracking-widest text-text-secondary mb-2">Email Address *</label>
-              <input required type="email" id="email" name="email" className="w-full bg-bg-primary border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-gold transition-colors" placeholder="hello@brand.com" />
+              <input required type="email" id="email" name="email" className="w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors" placeholder="hello@brand.com" />
             </div>
             <div>
               <label htmlFor="phone" className="block text-xs uppercase tracking-widest text-text-secondary mb-2">Phone Number</label>
-              <input type="tel" id="phone" name="phone" className="w-full bg-bg-primary border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-gold transition-colors" placeholder="+1 (555) 000-0000" />
+              <input type="tel" id="phone" name="phone" className="w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors" placeholder="+1 (555) 000-0000" />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="opportunityType" className="block text-xs uppercase tracking-widest text-text-secondary mb-2">Opportunity Type</label>
-              <select id="opportunityType" name="opportunityType" className="w-full bg-bg-primary border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-gold transition-colors appearance-none">
+              <select id="opportunityType" name="opportunityType" className="w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors appearance-none">
                 <option value="Sponsorship">Brand Sponsorship</option>
                 <option value="Collaboration">Collaboration</option>
                 <option value="Event Appearance">Event Appearance</option>
@@ -86,7 +86,7 @@ export function ContactForm() {
             </div>
             <div>
               <label htmlFor="budgetRange" className="block text-xs uppercase tracking-widest text-text-secondary mb-2">Budget Range</label>
-              <select id="budgetRange" name="budgetRange" className="w-full bg-bg-primary border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-gold transition-colors appearance-none">
+              <select id="budgetRange" name="budgetRange" className="w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors appearance-none">
                 <option value="Under $5k">Under $5k</option>
                 <option value="$5k - $10k">$5k - $10k</option>
                 <option value="$10k - $50k">$10k - $50k</option>
@@ -98,7 +98,7 @@ export function ContactForm() {
 
           <div>
             <label htmlFor="message" className="block text-xs uppercase tracking-widest text-text-secondary mb-2">Message *</label>
-            <textarea required id="message" name="message" rows={4} className="w-full bg-bg-primary border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent-gold transition-colors" placeholder="Tell us about the project..."></textarea>
+            <textarea required id="message" name="message" rows={4} className="w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors" placeholder="Tell us about the project..."></textarea>
           </div>
 
           {status === "error" && (

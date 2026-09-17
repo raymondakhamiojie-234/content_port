@@ -77,7 +77,7 @@ export function HeroSection() {
             Queenfineshii
           </h1>
           <span className="absolute -bottom-6 sm:-bottom-8 md:-bottom-12 right-2 sm:right-0 md:-right-12 text-3xl sm:text-4xl md:text-6xl font-script text-accent-pink -rotate-6 drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-            The Queen
+            The First
           </span>
         </motion.div>
         

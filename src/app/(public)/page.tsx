@@ -41,7 +41,7 @@ export default async function Home() {
             Ginika Millicent Nwanya, popularly known as Ginika Godwin or Queenfineshii, is a Nigerian-born content creator, musical artist and entertainer known for her bold personality, confidence, humor and ability to command attention.
           </p>
           <div className="text-2xl md:text-5xl font-script text-accent-pink">
-            "I am the queen of the united state of American, The Most Beautiful Girl in the whole wild world"
+            "I am the Queen of the United States of America, the Most Beautiful Girl in the Whole Wide World, Queenfineshii the First."
           </div>
         </div>
       </section>

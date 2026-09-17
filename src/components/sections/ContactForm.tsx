@@ -87,7 +87,6 @@ export function ContactForm() {
             <div>
               <label htmlFor="budgetRange" className="block text-xs uppercase tracking-widest text-text-secondary mb-2">Budget Range</label>
               <select id="budgetRange" name="budgetRange" className="w-full bg-input-bg border border-border-color rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-accent-gold transition-colors appearance-none">
-                <option value="Under $5k">Under $5k</option>
                 <option value="$5k - $10k">$5k - $10k</option>
                 <option value="$10k - $50k">$10k - $50k</option>
                 <option value="$50k+">$50k+</option>

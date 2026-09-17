@@ -1,9 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 
 const chapters = [
   {
@@ -39,48 +36,21 @@ const chapters = [
 ];
 
 export function JourneySection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    
-    // Horizontal scroll effect
-    if (sectionRef.current && containerRef.current) {
-      const pinWrap = containerRef.current;
-      const pinWrapWidth = pinWrap.scrollWidth;
-      const windowWidth = window.innerWidth;
-      
-      gsap.to(pinWrap, {
-        x: -pinWrapWidth + windowWidth,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          pin: true,
-          scrub: 1,
-          end: () => "+=" + pinWrapWidth,
-        }
-      });
-    }
-  }, []);
-
   return (
     <section 
       id="journey" 
-      ref={sectionRef} 
-      className="relative z-20 bg-bg-primary text-text-primary overflow-hidden py-20 min-h-screen flex items-center border-t border-border-color"
+      className="bg-bg-primary text-text-primary py-32 border-t border-border-color"
     >
       <div className="pl-6 md:pl-20">
         <h2 className="text-4xl md:text-6xl font-display uppercase mb-16 tracking-widest text-accent-gold">
           The Journey
         </h2>
-        
-        <div 
-          ref={containerRef} 
-          className="flex gap-12 md:gap-32 pb-20 w-max"
-        >
-          {chapters.map((chapter, index) => (
-            <div key={chapter.number} className="w-[300px] md:w-[500px] flex-shrink-0 flex flex-col justify-center bg-bg-secondary p-10 rounded-2xl shadow-xl border border-border-color">
+      </div>
+      
+      <div className="w-full overflow-x-auto pb-12 snap-x snap-mandatory hide-scrollbar">
+        <div className="flex gap-8 md:gap-16 px-6 md:px-20 w-max">
+          {chapters.map((chapter) => (
+            <div key={chapter.number} className="w-[320px] md:w-[450px] flex-shrink-0 flex flex-col justify-center bg-bg-secondary p-10 rounded-2xl shadow-xl border border-border-color snap-center md:snap-start">
               <div className="text-6xl md:text-8xl font-display text-accent-pink/20 font-bold mb-4">
                 {chapter.number}
               </div>
@@ -92,8 +62,8 @@ export function JourneySection() {
               </p>
             </div>
           ))}
-          {/* Spacer at the end for smooth scrolling exit */}
-          <div className="w-[10vw]"></div>
+          {/* Spacer at the end for proper padding on right edge */}
+          <div className="w-[6vw] md:w-[10vw] flex-shrink-0"></div>
         </div>
       </div>
     </section>

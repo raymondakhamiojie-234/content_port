@@ -31,7 +31,7 @@ export function Footer() {
               <a href="https://tiktok.com/@queenfineshii" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all">
                 <FaTiktok size={18} />
               </a>
-              <a href="https://instagram.com/queenfineshii" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all">
+              <a href="https://www.instagram.com/iamginikagodwin?stkn=ZjQ3Ymc5cHljc2w0&utm_source=qr" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all">
                 <FaInstagram size={18} />
               </a>
               <a href="https://x.com/queenfineshii" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/5 rounded-full hover:bg-accent-gold hover:text-black transition-all">

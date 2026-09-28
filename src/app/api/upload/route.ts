@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
-import { put } from "@vercel/blob";
+import { writeFile, mkdir } from "fs/promises";
+import path from "path";
+import { existsSync } from "fs";
 
 export async function POST(request: Request) {
   try {
@@ -14,17 +16,27 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    // Create a safe, unique filename
     const filename = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
+    
+    // Save to the public/uploads directory so Next.js can serve it statically
+    const uploadDir = path.join(process.cwd(), "public", "uploads");
 
-    // Upload to Vercel Blob
-    const blob = await put(filename, file, {
-      access: 'public',
-      token: process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_READ_WRITE_TOKEN_READ_WRITE_TOKEN,
-    });
+    // Ensure the directory exists
+    if (!existsSync(uploadDir)) {
+      await mkdir(uploadDir, { recursive: true });
+    }
 
-    return NextResponse.json({ url: blob.url });
+    const filepath = path.join(uploadDir, filename);
+    await writeFile(filepath, buffer);
+
+    // Return the URL path (accessible via the browser)
+    return NextResponse.json({ url: `/uploads/${filename}` });
   } catch (error) {
     console.error("Upload error:", error);
-    return NextResponse.json({ error: "Failed to upload file to Vercel Blob" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to upload file locally" }, { status: 500 });
   }
 }

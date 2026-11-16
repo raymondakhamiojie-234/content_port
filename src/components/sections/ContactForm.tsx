@@ -18,6 +18,7 @@ export function ContactForm() {
       opportunityType: formData.get("opportunityType"),
       budgetRange: formData.get("budgetRange"),
       message: formData.get("message"),
+      _gotcha: formData.get("_gotcha"),
     };
 
     try {
@@ -51,6 +52,8 @@ export function ContactForm() {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Honeypot field for bot protection */}
+          <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="fullName" className="block text-xs uppercase tracking-widest text-text-secondary mb-2">Full Name *</label>

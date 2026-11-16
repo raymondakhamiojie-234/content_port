@@ -1,51 +1,48 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
 
-const prisma = new PrismaClient();
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export async function GET() {
   try {
-    const session = await getServerSession();
-    if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
-    const journeyEvents = await prisma.contentPost.findMany({
-      where: { category: "journey" },
+    const journeyItems = await prisma.contentPost.findMany({
+      where: { platform: "journey" },
       orderBy: { createdAt: 'desc' }
     });
-    return NextResponse.json(journeyEvents);
+    return NextResponse.json(journeyItems);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch journey" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to fetch journey items" }, { status: 500 });
   }
 }
 
 export async function POST(request: Request) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const data = await request.json();
-    const event = await prisma.contentPost.create({
+    const item = await prisma.contentPost.create({
       data: {
         title: data.title,
         caption: data.caption,
-        platform: "journey",
-        category: "journey",
+        category: data.category,
         mediaUrl: data.mediaUrl,
+        platform: "journey",
         featured: data.featured ?? false,
       }
     });
-    return NextResponse.json(event);
+    return NextResponse.json(item);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to create journey event" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to create journey item" }, { status: 500 });
   }
 }
 
 export async function PUT(request: Request) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const data = await request.json();
@@ -54,9 +51,10 @@ export async function PUT(request: Request) {
       data: {
         title: data.title,
         caption: data.caption,
+        category: data.category,
         mediaUrl: data.mediaUrl,
         featured: data.featured ?? false,
-}
+      }
     });
     return NextResponse.json(item);
   } catch (error) {
@@ -66,7 +64,7 @@ export async function PUT(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const { searchParams } = new URL(request.url);

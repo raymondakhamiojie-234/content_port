@@ -1,25 +1,25 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
 
-const prisma = new PrismaClient();
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export async function GET() {
   try {
     const images = await prisma.galleryImage.findMany({
-      orderBy: { createdAt: 'desc' }
+      orderBy: { order: 'asc' }
     });
     return NextResponse.json(images);
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch images" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to fetch gallery images" }, { status: 500 });
   }
 }
 
 export async function POST(request: Request) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const data = await request.json();
@@ -29,6 +29,7 @@ export async function POST(request: Request) {
         caption: data.caption,
         category: data.category,
         featured: data.featured ?? false,
+        order: data.order ?? 0,
       }
     });
     return NextResponse.json(image);
@@ -39,7 +40,7 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const data = await request.json();
@@ -47,10 +48,10 @@ export async function PUT(request: Request) {
       where: { id: data.id },
       data: {
         caption: data.caption,
-        url: data.url,
         category: data.category,
         featured: data.featured ?? false,
-}
+        order: data.order ?? 0,
+      }
     });
     return NextResponse.json(item);
   } catch (error) {
@@ -60,7 +61,7 @@ export async function PUT(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    const session = await getServerSession();
+    const session = await getServerSession(authOptions);
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const { searchParams } = new URL(request.url);

@@ -6,11 +6,21 @@ export function Footer() {
     <footer className="bg-black py-20 border-t border-white/10 text-white">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          <div className="lg:col-span-2">
-            <h2 className="text-4xl font-display font-bold uppercase mb-4">Queenfineshii</h2>
-            <p className="text-lg text-white/60 mb-2">Ginika Godwin</p>
-            <p className="text-sm text-white/50 max-w-sm">
+          <div className="lg:col-span-2" itemScope itemType="https://schema.org/Person">
+            <h2 className="text-4xl font-display font-bold uppercase mb-4" itemProp="name">Queenfineshii</h2>
+            <p className="text-lg text-white/60 mb-2" itemProp="alternateName">Ginika Godwin</p>
+            <p className="text-sm text-white/50 max-w-sm mb-4" itemProp="jobTitle">
               Content Creator • Musical Artist • Entertainer
+            </p>
+            <p className="text-sm text-accent-gold">
+              Contact:{" "}
+              <a 
+                href="mailto:hello@ginikagodwin.com" 
+                itemProp="email" 
+                className="text-white hover:text-accent-gold underline transition-colors"
+              >
+                hello@ginikagodwin.com
+              </a>
             </p>
           </div>
           
@@ -59,8 +69,8 @@ export function Footer() {
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-sm text-white/40">
           <p>© {new Date().getFullYear()} Queenfineshii. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="#" className="hover:text-white">Privacy Policy</Link>
-            <Link href="#" className="hover:text-white">Terms of Service</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

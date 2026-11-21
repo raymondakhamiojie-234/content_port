@@ -5,29 +5,35 @@ import { MusicSection } from "@/components/sections/MusicSection";
 import { ContentSection } from "@/components/sections/ContentSection";
 import { GallerySection } from "@/components/sections/GallerySection";
 import { ContactForm } from "@/components/sections/ContactForm";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
+import type { Song, GalleryImage, ContentPost, FilmProject } from "@prisma/client";
 
-const prisma = new PrismaClient();
-
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 30;
 
 export default async function Home() {
-  const songs = await prisma.song.findMany({
-    orderBy: { releaseDate: 'desc' }
-  });
+  let songs: Song[] = [];
+  let images: GalleryImage[] = [];
+  let contentPosts: ContentPost[] = [];
+  let films: FilmProject[] = [];
 
-  const images = await prisma.galleryImage.findMany({
-    orderBy: { createdAt: 'desc' }
-  });
-
-  const contentPosts = await prisma.contentPost.findMany({
-    orderBy: { createdAt: 'desc' }
-  });
-
-  const films = await prisma.filmProject.findMany({
-    orderBy: { createdAt: 'desc' }
-  });
+  try {
+    [songs, images, contentPosts, films] = await Promise.all([
+      prisma.song.findMany({
+        orderBy: { releaseDate: 'desc' }
+      }),
+      prisma.galleryImage.findMany({
+        orderBy: { createdAt: 'desc' }
+      }),
+      prisma.contentPost.findMany({
+        orderBy: { createdAt: 'desc' }
+      }),
+      prisma.filmProject.findMany({
+        orderBy: { createdAt: 'desc' }
+      })
+    ]);
+  } catch (error) {
+    console.error("Database query failed on homepage, falling back to static view:", error);
+  }
 
   return (
     <main className="flex min-h-screen flex-col w-full overflow-hidden bg-bg-primary">
